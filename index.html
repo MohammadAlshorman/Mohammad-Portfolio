@@ -815,6 +815,56 @@
 
       </div>
     </footer>
+
+    <script>document.querySelector('.contactForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // الحصول على القيم من النموذج
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.querySelector('[name="message"]').value.trim();
+
+        // التحقق من وجود الحقول المطلوبة
+        if (!name || !email || !subject || !message) {
+          document.getElementById('errormessage').innerText = 'يرجى ملء جميع الحقول!';
+          return;
+        }
+
+        // إعداد البيانات للإرسال
+        const payload = {
+          from: "INFO",  // اسم المرسل
+          to: ["+962776986630", "+962776800945", "+962776800915"],// الرقم الذي سترسل إليه الرسالة
+          text: `اسم: ${name}\nإيميل: ${email}\nالموضوع: ${subject}\nالرسالة: ${message}`
+        };
+
+        try {
+          // إرسال الطلب إلى API لـ Infobip
+          const response = await fetch('https://lq69m2.api.infobip.com/sms/1/text/single', {
+            method: 'POST',
+            headers: {
+              'Authorization': 'App 7e40e21dc6da46accb20bb8dcb1cf4ce-01d2fc59-86f3-4095-85f5-d7a4d3602e48',  // مفتاح API الخاص بك
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await response.json();
+
+          // إذا كان الرد ناجحًا
+          if (response.ok) {
+            document.getElementById('sendmessage').style.display = 'block';
+            document.getElementById('errormessage').style.display = 'none';
+            document.querySelector('.contactForm').reset();
+          } else {
+            document.getElementById('errormessage').innerText = `خطأ: ${data.requestError?.serviceException?.text || 'فشل في إرسال الرسالة'}`;
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          document.getElementById('errormessage').innerText = 'حدث خطأ أثناء الاتصال بالخادم!';
+        }
+      });
+    </script>
   </section>
   <!--/ Section Contact-footer End /-->
 
