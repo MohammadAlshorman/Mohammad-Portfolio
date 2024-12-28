@@ -819,7 +819,11 @@
                     </h5>
                   </div>
                   <div>
-                    <form action="" method="post" role="form" class="contactForm">
+
+
+
+                    <!-- <form action="https://api.web3forms.com/submit" method="post" role="form" class="contactForm">
+                      <input type="hidden" name="access_key" value="3501ed85-b391-48d3-bf74-a98f560d1f44">
                       <div id="sendmessage">Your message has been sent. Thank you!</div>
                       <div id="errormessage"></div>
                       <div class="row">
@@ -855,7 +859,70 @@
                           <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
                         </div>
                       </div>
+                    </form> -->
+                    <form action="https://api.web3forms.com/submit" method="post" role="form" class="contactForm"
+                      id="contactForm">
+                      <input type="hidden" name="access_key" value="3501ed85-b391-48d3-bf74-a98f560d1f44">
+
+                      <div id="sendmessage" style="display: none;" class="alert alert-success"> Thank you!
+                        The form has
+                        been submitted successfully.
+                        We will reply to you soon!✅
+                      </div>
+                      <div id="errormessage" style="display: none;" class="alert alert-danger">Failed to send the❌
+                        message. Please try again!</div>
+
+                      <div class="row">
+                        <div class="col-md-12 mb-3">
+                          <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required
+                            minlength="4" />
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <input type="email" name="email" class="form-control" id="email" placeholder="Your Email"
+                            required />
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject"
+                            required minlength="4" />
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <textarea name="message" class="form-control" rows="5" placeholder="Message"
+                            required></textarea>
+                        </div>
+                        <div class="col-md-12 text-center">
+                          <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                        </div>
+                      </div>
                     </form>
+
+
+
+                    <script>
+                      document.getElementById('contactForm').addEventListener('submit', async function (e) {
+                        e.preventDefault();
+                        const form = e.target;
+                        const formData = new FormData(form);
+
+                        try {
+                          const response = await fetch(form.action, {
+                            method: form.method,
+                            body: formData
+                          });
+
+                          if (response.ok) {
+                            document.getElementById('sendmessage').style.display = 'block';
+                            document.getElementById('errormessage').style.display = 'none';
+                            form.reset(); // يمسح الحقول بعد الإرسال
+                          } else {
+                            throw new Error('Failed to send');
+                          }
+                        } catch (error) {
+                          document.getElementById('sendmessage').style.display = 'none';
+                          document.getElementById('errormessage').style.display = 'block';
+                        }
+                      });
+                    </script>
+
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -915,7 +982,7 @@
 
       </div>
     </footer>
-    <script>
+    <!-- <script>
       document.querySelector('.contactForm').addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -966,7 +1033,7 @@
       });
     </script>
 
-
+-->
 
   </section>
   <!--/ Section Contact-footer End /-->
