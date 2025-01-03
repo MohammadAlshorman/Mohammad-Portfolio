@@ -129,11 +129,58 @@
       font-weight: 400;
       font-style: normal;
     }
+
+    /* تصميم الدائرة */
+    #circle {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: #0078ff;
+      border-radius: 50%;
+      pointer-events: none;
+      /* لمنع التداخل مع العناصر الأخرى */
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+      /* تأثير ناعم */
+      box-shadow: 0 4px 15px #0078ff;
+      z-index: 9999;
+      /* التأكد من أن الدائرة فوق كل العناصر */
+    }
+
+    /* تخصيص المسطرة */
+    ::-webkit-scrollbar {
+      width: 20px;
+      /* عرض المسطرة */
+    }
+
+    /* تخصيص المسطرة نفسها */
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 150, 255, 0.7);
+      border-radius: 10px;
+      /* منح المسطرة شكل دائري */
+    }
+
+    /* تخصيص المسطرة عند التمرير */
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 150, 255, 1);
+    }
+
+    /* تخصيص المسطرة الخلفية */
+    ::-webkit-scrollbar-track {
+      background-color: #f0f0f0;
+      border-radius: 10px;
+    }
+
+    /* تخصيص الزوايا (الحدود) */
+    ::-webkit-scrollbar-corner {
+      background-color: #f0f0f0;
+    }
   </style>
 
 </head>
 
 <body id="page-top">
+  <div id="circle"></div>
 
   <!--/ Nav Star /-->
   <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
@@ -717,9 +764,7 @@
             <div class="card-footer">
               <div class="post-author">
                 <a href="https://github.com/MohammadAlshorman" target="_blank">
-                  <img
-                    src="https://scontent.famm3-1.fna.fbcdn.net/v/t39.30808-6/363782084_240645755562346_424305195539838018_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeG_6OZXBQIz8lO_P9AycxDygJHyS522CqeAkfJLnbYKp22AkrPtP71RWwkIyd1OMBbJj_LfcaqobxAtPr_0X6Sc&_nc_ohc=sF6BMgg4oukQ7kNvgHnxpdy&_nc_zt=23&_nc_ht=scontent.famm3-1.fna&_nc_gid=Aq5BtgszLJaPUmMks1U9iNl&oh=00_AYDEchO2Vr0xRngF7XP9gyeCYBwKhiZURfKCgGB6zFcFMg&oe=676B44B1"
-                    alt="" class="avatar rounded-circle">
+                  <img src="/img/M7MD Alshorman.jpg" alt="" class="avatar rounded-circle">
                   <span class="author">M7MD Al-shorman❤️</span>
                 </a>
               </div>
@@ -751,9 +796,7 @@
             <div class="card-footer">
               <div class="post-author">
                 <a href="https://github.com/MohammadAlshorman" target="_blank">
-                  <img
-                    src="https://scontent.famm3-1.fna.fbcdn.net/v/t39.30808-6/363782084_240645755562346_424305195539838018_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeG_6OZXBQIz8lO_P9AycxDygJHyS522CqeAkfJLnbYKp22AkrPtP71RWwkIyd1OMBbJj_LfcaqobxAtPr_0X6Sc&_nc_ohc=sF6BMgg4oukQ7kNvgHnxpdy&_nc_zt=23&_nc_ht=scontent.famm3-1.fna&_nc_gid=Aq5BtgszLJaPUmMks1U9iNl&oh=00_AYDEchO2Vr0xRngF7XP9gyeCYBwKhiZURfKCgGB6zFcFMg&oe=676B44B1"
-                    alt="" class="avatar rounded-circle">
+                  <img src="/img/M7MD Alshorman.jpg" alt="" class="avatar rounded-circle">
                   <span class="author">M7MD Al-shorman❤️</span>
                 </a>
               </div>
@@ -785,9 +828,7 @@
             <div class="card-footer">
               <div class="post-author">
                 <a href="https://github.com/MohammadAlshorman" target="_blank">
-                  <img
-                    src="https://scontent.famm3-1.fna.fbcdn.net/v/t39.30808-6/363782084_240645755562346_424305195539838018_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeG_6OZXBQIz8lO_P9AycxDygJHyS522CqeAkfJLnbYKp22AkrPtP71RWwkIyd1OMBbJj_LfcaqobxAtPr_0X6Sc&_nc_ohc=sF6BMgg4oukQ7kNvgHnxpdy&_nc_zt=23&_nc_ht=scontent.famm3-1.fna&_nc_gid=Aq5BtgszLJaPUmMks1U9iNl&oh=00_AYDEchO2Vr0xRngF7XP9gyeCYBwKhiZURfKCgGB6zFcFMg&oe=676B44B1"
-                    alt="" class="avatar rounded-circle">
+                  <img src="/img/M7MD Alshorman.jpg" alt="" class="avatar rounded-circle">
                   <span class="author">M7MD Alshorman❤️</span>
                 </a>
               </div>
@@ -892,6 +933,7 @@
                           <textarea name="message" class="form-control" rows="5" placeholder="Message"
                             required></textarea>
                         </div>
+
                         <div class="col-md-12 text-center">
                           <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
                         </div>
@@ -1060,6 +1102,14 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+  <script>
+    const circle = document.getElementById("circle");
+
+    document.addEventListener("mousemove", (e) => {
+      circle.style.left = `${e.pageX}px`;
+      circle.style.top = `${e.pageY}px`;
+    });
+  </script>
 
 
 </body>
