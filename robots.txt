@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mohammadalshorman.vercel.app/sitemap.xml
