@@ -1,0 +1,51 @@
+{
+  "name": {
+    "ar": "محمد الشرمان",
+    "en": "Mohammad Alshorman",
+    "variations": [
+      "محمد شرمان",
+      "Mohammed Alshorman", 
+      "Mohammad Al-shorman",
+      "محمد الشرمان",
+      "Mohammad Alsharman"
+    ]
+  },
+  "title": {
+    "ar": "مطور ويب متكامل",
+    "en": "Full Stack Web Developer"
+  },
+  "location": {
+    "city": "Irbid",
+    "country": "Jordan",
+    "ar": "إربد، الأردن"
+  },
+  "skills": [
+    "Angular",
+    ".NET Core",
+    "JavaScript",
+    "TypeScript",
+    "HTML",
+    "CSS",
+    "Node.js",
+    "SQL",
+    "Git"
+  ],
+  "education": "Al-Hussein Bin Talal University",
+  "training": "Orange Coding Academy",
+  "contact": {
+    "email": "mohammadalshorman@gmail.com",
+    "website": "https://mohammadportfolio-eta.vercel.app"
+  },
+  "searchTerms": [
+    "محمد الشرمان",
+    "Mohammad Alshorman",
+    "مطور ويب",
+    "Full Stack Developer",
+    "Angular Developer",
+    "برمجة مواقع",
+    "تطوير ويب",
+    "مطور مواقع إربد",
+    "Mohammad Alshorman Jordan",
+    "محمد الشرمان الأردن"
+  ]
+}

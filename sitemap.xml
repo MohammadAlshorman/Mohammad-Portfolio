@@ -1,39 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Homepage - أعلى أولوية -->
   <url>
-    <loc>https://mohammadalshorman.vercel.app/</loc>
+    <loc>https://mohammadportfolio-eta.vercel.app/</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- About Section -->
   <url>
-    <loc>https://mohammadalshorman.vercel.app/#about</loc>
+    <loc>https://mohammadportfolio-eta.vercel.app/#about</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Skills Section -->
   <url>
-    <loc>https://mohammadalshorman.vercel.app/#projects</loc>
+    <loc>https://mohammadportfolio-eta.vercel.app/#skills</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Experience Section -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/#experience</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Projects Section - أولوية عالية لأنها مهمة للعملاء -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/#projects</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- Education Section -->
   <url>
-    <loc>https://mohammadalshorman.vercel.app/#skills</loc>
+    <loc>https://mohammadportfolio-eta.vercel.app/#education</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Contact Section -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/#contact</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Projects page if exists -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/Projects.html</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Arabic redirect page for better SEO -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/ar.html</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://mohammadalshorman.vercel.app/#experience</loc>
-    <lastmod>2025-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mohammadalshorman.vercel.app/#contact</loc>
-    <lastmod>2025-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
 </urlset>

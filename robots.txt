@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mohammadalshorman.vercel.app/sitemap.xml
+# Sitemap
+Sitemap: https://mohammadportfolio-eta.vercel.app/sitemap.xml
+
+# Crawl-delay (optional - helps with server load)
+Crawl-delay: 1
