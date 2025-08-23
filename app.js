@@ -85,57 +85,23 @@ class PortfolioManager {
     setupNavigation() {
         // Mobile menu toggle
         this.navToggle?.addEventListener('click', () => {
-            this.toggleMobileMenu();
+            this.navToggle.classList.toggle('active');
+            this.navMenu.classList.toggle('active');
+            document.body.style.overflow = this.navMenu.classList.contains('active') ? 'hidden' : 'auto';
         });
 
         // Close mobile menu when clicking on links
         this.navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                this.closeMobileMenu();
+                this.navToggle?.classList.remove('active');
+                this.navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!this.navbar.contains(e.target) && this.navMenu.classList.contains('active')) {
-                this.closeMobileMenu();
-            }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.navMenu.classList.contains('active')) {
-                this.closeMobileMenu();
-            }
         });
 
         // Update active nav link on scroll
         this.updateActiveNavLink();
         window.addEventListener('scroll', this.throttle(() => this.updateActiveNavLink(), 100));
-    }
-
-    // Toggle mobile menu
-    toggleMobileMenu() {
-        const isActive = this.navMenu.classList.toggle('active');
-        this.navToggle.classList.toggle('active', isActive);
-        
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = isActive ? 'hidden' : 'auto';
-        
-        // Update aria attributes for accessibility
-        this.navToggle.setAttribute('aria-expanded', isActive);
-        this.navMenu.setAttribute('aria-hidden', !isActive);
-    }
-
-    // Close mobile menu
-    closeMobileMenu() {
-        this.navToggle?.classList.remove('active');
-        this.navMenu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-        
-        // Update aria attributes for accessibility
-        this.navToggle?.setAttribute('aria-expanded', 'false');
-        this.navMenu.setAttribute('aria-hidden', 'true');
     }
 
     updateActiveNavLink() {
@@ -275,19 +241,6 @@ class PortfolioManager {
         this.contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const formData = new FormData(this.contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                subject: formData.get('subject'),
-                message: formData.get('message')
-            };
-
-            // Validate form
-            if (!this.validateForm(data)) {
-                return;
-            }
-
             // Show loading state
             const submitBtn = this.contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
@@ -295,53 +248,30 @@ class PortfolioManager {
             submitBtn.disabled = true;
 
             try {
-                // Simulate form submission (replace with actual endpoint)
-                await this.simulateFormSubmission(data);
+                // Get form data
+                const formData = new FormData(this.contactForm);
                 
-                this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-                this.contactForm.reset();
+                // Submit to Web3Forms
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                    this.contactForm.reset();
+                } else {
+                    throw new Error(result.message || 'Failed to send message');
+                }
             } catch (error) {
+                console.error('Contact form error:', error);
                 this.showNotification('Failed to send message. Please try again or contact me directly.', 'error');
             } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }
-        });
-    }
-
-    validateForm(data) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (!data.name.trim()) {
-            this.showNotification('Please enter your name', 'error');
-            return false;
-        }
-        
-        if (!emailRegex.test(data.email)) {
-            this.showNotification('Please enter a valid email address', 'error');
-            return false;
-        }
-        
-        if (!data.subject.trim()) {
-            this.showNotification('Please enter a subject', 'error');
-            return false;
-        }
-        
-        if (!data.message.trim()) {
-            this.showNotification('Please enter your message', 'error');
-            return false;
-        }
-        
-        return true;
-    }
-
-    async simulateFormSubmission(data) {
-        // In a real application, you would send this to your backend
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simulate success/failure (90% success rate)
-                Math.random() > 0.1 ? resolve(data) : reject(new Error('Network error'));
-            }, 2000);
         });
     }
 

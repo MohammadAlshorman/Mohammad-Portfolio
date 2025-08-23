@@ -77,7 +77,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style-responsive.css">
+    <link rel="stylesheet" href="style.css">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -110,32 +110,32 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home" class="logo-text" aria-label="Mohammad Alshorman Portfolio Home">Mohammad Alshorman</a>
+                <span class="logo-text">Mohammad Alshorman</span>
             </div>
             
-            <ul class="nav-menu" id="nav-menu" role="menubar" aria-hidden="true">
-                <li role="none"><a href="#home" class="nav-link active" role="menuitem">Home</a></li>
-                <li role="none"><a href="#about" class="nav-link" role="menuitem">About</a></li>
-                <li role="none"><a href="#skills" class="nav-link" role="menuitem">Skills</a></li>
-                <li role="none"><a href="#experience" class="nav-link" role="menuitem">Experience</a></li>
-                <li role="none"><a href="#projects" class="nav-link" role="menuitem">Projects</a></li>
-                <li role="none"><a href="#education" class="nav-link" role="menuitem">Education</a></li>
-                <li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             
             <div class="nav-controls">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode" type="button">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
                 </button>
                 
-                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" type="button">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </button>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </div>
     </nav>
@@ -525,7 +525,7 @@
             <div class="projects-grid">
                 <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-image">
-                                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=500&fit=crop&auto=format&q=80" alt="Municipality Website" loading="lazy">
+                        <img src="https://petra.gov.jo/upload/1719341842939.jpg" alt="Municipality Website" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/4f46e5/ffffff?text=Municipality+Website'">
                         <div class="project-overlay">
                             <a href="https://mazar.gov.jo/" target="_blank" class="project-link">
                                 <i class="fas fa-external-link-alt"></i>
@@ -764,7 +764,16 @@
                     </div>
                 </div>
                 
-                <form class="contact-form" id="contact-form" data-aos="fade-left" data-aos-duration="1000">
+                <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form" data-aos="fade-left" data-aos-duration="1000">
+                    <!-- Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="3501ed85-b391-48d3-bf74-a98f560d1f44">
+                    
+                    <!-- Optional: Redirect after successful submission -->
+                    <input type="hidden" name="redirect" value="https://mohammadportfolio-eta.vercel.app/?success=true">
+                    
+                    <!-- Optional: Subject prefix -->
+                    <input type="hidden" name="subject" value="New Contact Form Submission from Portfolio">
+                    
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" required>
                     </div>
@@ -777,6 +786,10 @@
                     <div class="form-group">
                         <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
                     </div>
+                    
+                    <!-- Honeypot Spam Protection -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-paper-plane"></i>
                         Send Message
