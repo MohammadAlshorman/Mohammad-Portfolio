@@ -85,23 +85,57 @@ class PortfolioManager {
     setupNavigation() {
         // Mobile menu toggle
         this.navToggle?.addEventListener('click', () => {
-            this.navToggle.classList.toggle('active');
-            this.navMenu.classList.toggle('active');
-            document.body.style.overflow = this.navMenu.classList.contains('active') ? 'hidden' : 'auto';
+            this.toggleMobileMenu();
         });
 
         // Close mobile menu when clicking on links
         this.navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                this.navToggle?.classList.remove('active');
-                this.navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                this.closeMobileMenu();
             });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!this.navbar.contains(e.target) && this.navMenu.classList.contains('active')) {
+                this.closeMobileMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.navMenu.classList.contains('active')) {
+                this.closeMobileMenu();
+            }
         });
 
         // Update active nav link on scroll
         this.updateActiveNavLink();
         window.addEventListener('scroll', this.throttle(() => this.updateActiveNavLink(), 100));
+    }
+
+    // Toggle mobile menu
+    toggleMobileMenu() {
+        const isActive = this.navMenu.classList.toggle('active');
+        this.navToggle.classList.toggle('active', isActive);
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = isActive ? 'hidden' : 'auto';
+        
+        // Update aria attributes for accessibility
+        this.navToggle.setAttribute('aria-expanded', isActive);
+        this.navMenu.setAttribute('aria-hidden', !isActive);
+    }
+
+    // Close mobile menu
+    closeMobileMenu() {
+        this.navToggle?.classList.remove('active');
+        this.navMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // Update aria attributes for accessibility
+        this.navToggle?.setAttribute('aria-expanded', 'false');
+        this.navMenu.setAttribute('aria-hidden', 'true');
     }
 
     updateActiveNavLink() {
