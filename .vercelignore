@@ -1,0 +1,11 @@
+# Don't ignore verification files
+!google*.html
+!sitemap.xml
+!robots.txt
+
+# Ignore development files
+node_modules/
+.env
+.env.local
+.DS_Store
+*.log

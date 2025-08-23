@@ -9,6 +9,13 @@
   ],
   "routes": [
     {
+      "src": "/google876b9330e2f08c93.html",
+      "dest": "/google876b9330e2f08c93.html",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8"
+      }
+    },
+    {
       "src": "/robots.txt",
       "dest": "/robots.txt",
       "headers": {
@@ -42,6 +49,19 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/google876b9330e2f08c93.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
         }
       ]
     },
