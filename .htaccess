@@ -1,4 +1,4 @@
-# SEO Optimizations for Mohammad Portfolio
+# SEO Optimizations for Mohammad Portfolio & Blog
 
 # Enable Gzip Compression
 <IfModule mod_deflate.c>
@@ -11,6 +11,10 @@
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
 </IfModule>
 
 # Set Cache Headers
@@ -22,7 +26,13 @@
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/json "access plus 1 week"
+    ExpiresByType application/rss+xml "access plus 1 day"
+    ExpiresByType text/html "access plus 1 week"
 </IfModule>
 
 # Security Headers
@@ -31,6 +41,29 @@
     Header always set X-Frame-Options DENY
     Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Cache control for static resources
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf|woff|woff2)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+</IfModule>
+
+# Blog URL Redirects
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirect old blog patterns to new blog system
+    RewriteRule ^blog/?$ /blog/blog.html [R=301,L]
+    RewriteRule ^blog/([^/]+)/?$ /blog/post.html?slug=$1 [R=301,L]
+</IfModule>
+
+# MIME Types
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+    AddType application/font-woff .woff
+    AddType application/font-woff2 .woff2
+    AddType application/rss+xml .rss
+    AddType application/json .json
 </IfModule>
 
 # Redirect to HTTPS (if needed)

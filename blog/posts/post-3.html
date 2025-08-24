@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Architecture in .NET - Mohammad Alshorman Blog</title>
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="glvuq_APk17ipqYfTsjfIWbPZSiPJc_1UZ_7O3MUsJs" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1S6WYT0T9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-S1S6WYT0T9');
+    </script>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Understanding and implementing Clean Architecture principles in .NET applications with practical examples and best practices.">
+    <meta name="keywords" content="Clean Architecture, .NET, Design Patterns, Mohammad Alshorman">
+    <meta name="author" content="Mohammad Alshorman">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/simple-blog.css">
+    
+    <style>
+        /* Article-specific styles for English content */
+        html[lang="en"] {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .article-content {
+            padding: 3rem 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #374151;
+        }
+        
+        .article-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #7c3aed;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            border: 1px solid #7c3aed;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .highlight-box::before {
+            content: '🏗️';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #7c3aed;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'C# / .NET';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            background: #374151;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+        }
+        
+        .architecture-layer {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .architecture-layer:hover {
+            border-color: #7c3aed;
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.1);
+        }
+        
+        .layer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .back-to-blog:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 1rem;
+                border-radius: 15px;
+            }
+            
+            .article-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="blog-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../../index.html" class="logo">
+                    <img src="../../img/M7MD Alshorman.jpg" alt="Mohammad Alshorman" class="logo-image">
+                    <span>Mohammad Alshorman</span>
+                </a>
+                
+                <nav class="header-nav">
+                    <ul class="nav-links">
+                        <li><a href="../../index.html" class="nav-link">
+                            <i class="fas fa-home"></i> Home
+                        </a></li>
+                        <li><a href="../../Projects.html" class="nav-link">
+                            <i class="fas fa-briefcase"></i> Projects
+                        </a></li>
+                        <li><a href="../simple-blog.html" class="nav-link">
+                            <i class="fas fa-blog"></i> Blog
+                        </a></li>
+                        <li><a href="#contact" class="nav-link">
+                            <i class="fas fa-envelope"></i> Contact
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-controls">
+                    <button class="control-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i> Dark
+                    </button>
+                    <button class="control-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> AR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <a href="../simple-blog.html" class="back-to-blog">
+                <i class="fas fa-arrow-left"></i>
+                Back to Blog
+            </a>
+            
+            <article class="article-container">
+                <header class="article-header">
+                    <h1 class="article-title">Clean Architecture in .NET</h1>
+                    <p class="article-subtitle">Understanding and implementing Clean Architecture principles for maintainable and scalable applications</p>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>January 5, 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>15 minutes read</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user"></i>
+                            <span>Mohammad Alshorman</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i>
+                            <span>.NET</span>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="article-content">
+                    <section class="article-section">
+                        <h2 class="section-title">Introduction to Clean Architecture</h2>
+                        <p>
+                            Clean Architecture is a software design philosophy that separates the elements of a design into ring levels. 
+                            The main goal is to create systems that are testable, maintainable, and independent of frameworks, databases, 
+                            and external interfaces. This approach was popularized by Robert C. Martin (Uncle Bob) and has become a 
+                            cornerstone of modern software development.
+                        </p>
+                        <p>
+                            In the context of .NET applications, Clean Architecture provides a robust foundation for building scalable 
+                            and maintainable systems. It promotes separation of concerns, dependency inversion, and testability, 
+                            making your codebase more resilient to change and easier to understand.
+                        </p>
+                    </section>
+
+                    <div class="highlight-box">
+                        <h3 style="color: #7c3aed; margin-bottom: 1rem; font-weight: 600;">Why Clean Architecture?</h3>
+                        <p>
+                            Clean Architecture helps you build applications that are independent of frameworks, testable, 
+                            independent of UI, independent of databases, and independent of any external agency. 
+                            This leads to more maintainable and flexible codebases.
+                        </p>
+                    </div>
+
+                    <section class="article-section">
+                        <h2 class="section-title">The Four Layers of Clean Architecture</h2>
+                        
+                        <div class="architecture-layer">
+                            <div class="layer-title">
+                                <i class="fas fa-globe" style="color: #ef4444;"></i>
+                                Presentation Layer (UI)
+                            </div>
+                            <p>Contains controllers, views, and other UI components. This layer handles user interaction and presents data to the user. It depends on the Application layer.</p>
+                        </div>
+                        
+                        <div class="architecture-layer">
+                            <div class="layer-title">
+                                <i class="fas fa-cogs" style="color: #f59e0b;"></i>
+                                Application Layer (Use Cases)
+                            </div>
+                            <p>Contains business logic and use cases. It orchestrates the flow of data to and from the entities and directs those entities to use their business rules to achieve the goals of the use case.</p>
+                        </div>
+                        
+                        <div class="architecture-layer">
+                            <div class="layer-title">
+                                <i class="fas fa-cube" style="color: #10b981;"></i>
+                                Domain Layer (Business Logic)
+                            </div>
+                            <p>Contains entities, value objects, and domain services. This is the heart of the application and contains the business rules that are independent of any external concerns.</p>
+                        </div>
+                        
+                        <div class="architecture-layer">
+                            <div class="layer-title">
+                                <i class="fas fa-database" style="color: #3b82f6;"></i>
+                                Infrastructure Layer (Data Access)
+                            </div>
+                            <p>Contains implementations for external concerns like databases, web services, file systems, etc. This layer implements interfaces defined in the inner layers.</p>
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Implementing Clean Architecture in .NET</h2>
+                        
+                        <h3 style="color: #7c3aed; margin: 2rem 0 1rem; font-weight: 600;">1. Project Structure</h3>
+                        <p>
+                            Start by organizing your solution into separate projects that correspond to the architectural layers:
+                        </p>
+                        
+                        <div class="code-block">
+                            <br>
+                            MyApplication.Solution/<br>
+                            ├── src/<br>
+                            │   ├── MyApplication.Domain/          // Entities, Value Objects<br>
+                            │   ├── MyApplication.Application/      // Use Cases, Interfaces<br>
+                            │   ├── MyApplication.Infrastructure/   // Data Access, External Services<br>
+                            │   └── MyApplication.Web/             // Controllers, Views<br>
+                            └── tests/<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;├── MyApplication.Domain.Tests/<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;├── MyApplication.Application.Tests/<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;└── MyApplication.Integration.Tests/
+                        </div>
+
+                        <h3 style="color: #7c3aed; margin: 2rem 0 1rem; font-weight: 600;">2. Domain Layer Implementation</h3>
+                        <p>
+                            The Domain layer contains your business entities and core business logic. Here's an example of a domain entity:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Domain/Entities/Customer.cs<br>
+                            public class Customer : Entity<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public string FirstName { get; private set; }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public string LastName { get; private set; }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public Email Email { get; private set; }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public DateTime CreatedAt { get; private set; }<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;private Customer() { } // For EF Core<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public Customer(string firstName, string lastName, Email email)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FirstName = firstName ?? throw new ArgumentNullException(nameof(firstName));<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LastName = lastName ?? throw new ArgumentNullException(nameof(lastName));<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email = email ?? throw new ArgumentNullException(nameof(email));<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CreatedAt = DateTime.UtcNow;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public void UpdateName(string firstName, string lastName)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FirstName = firstName ?? throw new ArgumentNullException(nameof(firstName));<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LastName = lastName ?? throw new ArgumentNullException(nameof(lastName));<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </div>
+
+                        <h3 style="color: #7c3aed; margin: 2rem 0 1rem; font-weight: 600;">3. Application Layer Implementation</h3>
+                        <p>
+                            The Application layer contains use cases and interfaces. It defines what the system can do:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Application/Interfaces/ICustomerRepository.cs<br>
+                            public interface ICustomerRepository<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Task&lt;Customer&gt; GetByIdAsync(int id);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Task&lt;IEnumerable&lt;Customer&gt;&gt; GetAllAsync();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Task AddAsync(Customer customer);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Task UpdateAsync(Customer customer);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Task DeleteAsync(int id);<br>
+                            }<br>
+                            <br>
+                            // Application/UseCases/CreateCustomerUseCase.cs<br>
+                            public class CreateCustomerUseCase<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;private readonly ICustomerRepository _repository;<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public CreateCustomerUseCase(ICustomerRepository repository)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_repository = repository;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public async Task&lt;CustomerDto&gt; ExecuteAsync(CreateCustomerRequest request)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var email = new Email(request.Email);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var customer = new Customer(request.FirstName, request.LastName, email);<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await _repository.AddAsync(customer);<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new CustomerDto(customer);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Dependency Injection and IoC Container</h2>
+                        <p>
+                            Clean Architecture relies heavily on dependency inversion. In .NET, we use the built-in IoC container to manage dependencies:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Program.cs or Startup.cs<br>
+                            public void ConfigureServices(IServiceCollection services)<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Application Services<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;services.AddScoped&lt;CreateCustomerUseCase&gt;();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;services.AddScoped&lt;GetCustomerUseCase&gt;();<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Infrastructure Services<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;services.AddScoped&lt;ICustomerRepository, CustomerRepository&gt;();<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Database Context<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options.UseSqlServer(connectionString));<br>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Testing in Clean Architecture</h2>
+                        
+                        <h3 style="color: #7c3aed; margin: 2rem 0 1rem; font-weight: 600;">Unit Testing Domain Logic</h3>
+                        <p>
+                            Since the domain layer has no dependencies, it's easy to unit test:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            [Test]<br>
+                            public void Customer_Creation_Should_Set_Properties_Correctly()<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Arrange<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;var firstName = "John";<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;var lastName = "Doe";<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;var email = new Email("john.doe@example.com");<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Act<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;var customer = new Customer(firstName, lastName, email);<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Assert<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Assert.AreEqual(firstName, customer.FirstName);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Assert.AreEqual(lastName, customer.LastName);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Assert.AreEqual(email, customer.Email);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Assert.IsTrue(customer.CreatedAt &lt;= DateTime.UtcNow);<br>
+                            }
+                        </div>
+
+                        <h3 style="color: #7c3aed; margin: 2rem 0 1rem; font-weight: 600;">Testing Use Cases</h3>
+                        <p>
+                            Use cases can be tested by mocking their dependencies:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            [Test]<br>
+                            public async Task CreateCustomer_Should_Call_Repository_Add()<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Arrange<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;var mockRepository = new Mock&lt;ICustomerRepository&gt;();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;var useCase = new CreateCustomerUseCase(mockRepository.Object);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;var request = new CreateCustomerRequest<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FirstName = "John",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LastName = "Doe",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email = "john.doe@example.com"<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;};<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Act<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;await useCase.ExecuteAsync(request);<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Assert<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;mockRepository.Verify(r =&gt; r.AddAsync(It.IsAny&lt;Customer&gt;()), Times.Once);<br>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Benefits and Challenges</h2>
+                        
+                        <h3 style="color: #7c3aed; margin: 2rem 0 1rem; font-weight: 600;">Benefits</h3>
+                        <ul style="margin: 1rem 0 1rem 2rem; line-height: 2;">
+                            <li><strong>Testability:</strong> Each layer can be tested in isolation</li>
+                            <li><strong>Maintainability:</strong> Clear separation of concerns makes code easier to maintain</li>
+                            <li><strong>Flexibility:</strong> Easy to swap out infrastructure components</li>
+                            <li><strong>Framework Independence:</strong> Business logic is not tied to any specific framework</li>
+                            <li><strong>Database Independence:</strong> Can easily switch between different databases</li>
+                        </ul>
+
+                        <h3 style="color: #7c3aed; margin: 2rem 0 1rem; font-weight: 600;">Challenges</h3>
+                        <ul style="margin: 1rem 0 1rem 2rem; line-height: 2;">
+                            <li><strong>Initial Complexity:</strong> More setup required compared to simpler architectures</li>
+                            <li><strong>Over-engineering:</strong> May be overkill for simple applications</li>
+                            <li><strong>Learning Curve:</strong> Requires understanding of SOLID principles and design patterns</li>
+                            <li><strong>More Files:</strong> Results in more projects and files to manage</li>
+                        </ul>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Conclusion</h2>
+                        <p>
+                            Clean Architecture provides a robust foundation for building scalable and maintainable .NET applications. 
+                            While it requires more initial setup and understanding of design principles, the long-term benefits in terms of 
+                            testability, maintainability, and flexibility make it worthwhile for complex applications.
+                        </p>
+                        <p>
+                            The key to successfully implementing Clean Architecture is to start with a clear understanding of your domain 
+                            and business requirements, then structure your code to reflect these boundaries. Remember that architecture 
+                            should serve your business needs, not the other way around.
+                        </p>
+                        <p>
+                            As you implement Clean Architecture in your .NET projects, focus on the principles rather than rigid adherence 
+                            to a specific structure. The goal is to create code that is easy to understand, test, and modify as your 
+                            application evolves.
+                        </p>
+                    </section>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding: 2rem 0;">
+                <div class="footer-copyright">
+                    <p><strong>© 2024 Mohammad Alshorman</strong> - All Rights Reserved</p>
+                </div>
+                <div class="footer-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Irbid, Jordan</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/simple-blog.js"></script>
+</body>
+</html>

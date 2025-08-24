@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- Essential Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- SEO Meta Tags - Will be updated dynamically -->
+  <title>Blog Post | Mohammad Alshorman</title>
+  <meta name="description" content="Professional insights and tutorials by Mohammad Alshorman, Full Stack Web Developer from Irbid, Jordan.">
+  <meta name="keywords" content="Mohammad Alshorman, محمد شحادة الشرمان, Full Stack Developer, Web Development, Programming, ASP.NET Core, Angular">
+  <meta name="author" content="Mohammad Shehadeh Alshorman">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Canonical URL - Will be updated dynamically -->
+  <link rel="canonical" href="https://mohammadalshorman.com/blog/post.html">
+  
+  <!-- Open Graph / Facebook - Will be updated dynamically -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Blog Post | Mohammad Alshorman">
+  <meta property="og:description" content="Professional insights and tutorials by Mohammad Alshorman">
+  <meta property="og:image" content="https://mohammadalshorman.com/blog/assets/img/default-post.webp">
+  <meta property="og:url" content="https://mohammadalshorman.com/blog/post.html">
+  <meta property="og:site_name" content="Mohammad Alshorman Portfolio">
+  
+  <!-- Twitter Card - Will be updated dynamically -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog Post | Mohammad Alshorman">
+  <meta name="twitter:description" content="Professional insights and tutorials by Mohammad Alshorman">
+  <meta name="twitter:image" content="https://mohammadalshorman.com/blog/assets/img/default-post.webp">
+  <meta name="twitter:creator" content="@MohammadAlshorman">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../img/favicon.JPG">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  
+  <!-- Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  
+  <!-- Stylesheets -->
+    <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/blog.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#2563eb">
+  
+  <!-- Article Structured Data - Will be generated dynamically -->
+</head>
+
+<body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+  
+  <!-- Header -->
+  <header class="blog-header" role="banner">
+    <div class="container">
+      <div class="header-content">
+        <a href="../index.html" class="logo" aria-label="Mohammad Alshorman Portfolio Home">
+          Mohammad Alshorman
+        </a>
+        
+        <nav class="header-nav" role="navigation" aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="../index.html#about" class="nav-link">About</a></li>
+            <li><a href="../index.html#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="blog.html" class="nav-link">Blog</a></li>
+            <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        
+        <div class="header-actions">
+          <button id="theme-toggle" class="control-btn" aria-label="Toggle dark mode">
+            <i class="icon-moon" aria-hidden="true"></i>
+            Dark
+          </button>
+          
+          <a href="blog.html" class="control-btn" aria-label="Back to blog">
+            <i class="icon-arrow-left" aria-hidden="true"></i>
+            Back to Blog
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div id="breadcrumbs">
+    <!-- Breadcrumbs will be generated dynamically -->
+  </div>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content" role="main">
+    <div class="container">
+      
+      <!-- Loading State -->
+      <div id="loading-spinner" class="loading-spinner">
+        <div class="spinner" role="status" aria-label="Loading post"></div>
+        <p>Loading article...</p>
+      </div>
+
+      <!-- Post Container -->
+      <div id="post-container">
+        <!-- Post content will be dynamically loaded here -->
+      </div>
+
+      <!-- Table of Contents -->
+      <aside id="table-of-contents" class="toc-container" role="complementary" aria-label="Table of contents">
+        <!-- Table of contents will be generated dynamically -->
+      </aside>
+
+      <!-- Related Posts -->
+      <section class="related-posts" role="complementary" aria-labelledby="related-posts-title">
+        <h2 id="related-posts-title" class="related-posts-title">Related Articles</h2>
+        <div id="related-posts-grid" class="related-posts-grid">
+          <!-- Related posts will be generated dynamically -->
+        </div>
+      </section>
+
+      <!-- Post Navigation -->
+      <nav class="post-navigation" role="navigation" aria-label="Post navigation">
+        <div id="prev-post" class="nav-post nav-post-prev">
+          <!-- Previous post link will be generated dynamically -->
+        </div>
+        <div id="next-post" class="nav-post nav-post-next">
+          <!-- Next post link will be generated dynamically -->
+        </div>
+      </nav>
+
+      <!-- Share Section -->
+      <section class="share-section" role="complementary" aria-labelledby="share-title">
+        <h3 id="share-title" class="share-title">Share this article</h3>
+        <div class="share-buttons">
+          <button id="share-twitter" class="share-btn share-twitter" aria-label="Share on Twitter">
+            <i class="icon-twitter" aria-hidden="true"></i>
+            Twitter
+          </button>
+          <button id="share-linkedin" class="share-btn share-linkedin" aria-label="Share on LinkedIn">
+            <i class="icon-linkedin" aria-hidden="true"></i>
+            LinkedIn
+          </button>
+          <button id="share-facebook" class="share-btn share-facebook" aria-label="Share on Facebook">
+            <i class="icon-facebook" aria-hidden="true"></i>
+            Facebook
+          </button>
+          <button id="copy-link" class="share-btn share-copy" aria-label="Copy link to clipboard">
+            <i class="icon-link" aria-hidden="true"></i>
+            Copy Link
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="blog-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="../index.html" class="footer-link">Portfolio</a>
+          <a href="../index.html#about" class="footer-link">About</a>
+          <a href="../index.html#contact" class="footer-link">Contact</a>
+          <a href="blog.html" class="footer-link">Blog</a>
+          <a href="sitemap.xml" class="footer-link">Sitemap</a>
+          <a href="rss.xml" class="footer-link">RSS</a>
+        </div>
+        <p class="footer-copyright">
+          © 2024 Mohammad Alshorman (محمد شحادة الشرمان). All rights reserved. 
+          <span class="footer-location">Irbid, Jordan</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Post Page -->
+  <script>
+    // Enhanced Post Page functionality
+    class PostPageExtended extends PostPage {
+      constructor() {
+        super();
+        this.setupShareButtons();
+        this.setupPostNavigation();
+        this.setupRelatedPosts();
+      }
+
+      setupShareButtons() {
+        document.addEventListener('DOMContentLoaded', () => {
+          // Twitter share
+          const twitterBtn = document.getElementById('share-twitter');
+          if (twitterBtn) {
+            twitterBtn.addEventListener('click', () => {
+              const url = encodeURIComponent(window.location.href);
+              const text = encodeURIComponent(document.title);
+              window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}&via=MohammadAlshorman`, '_blank');
+            });
+          }
+
+          // LinkedIn share
+          const linkedinBtn = document.getElementById('share-linkedin');
+          if (linkedinBtn) {
+            linkedinBtn.addEventListener('click', () => {
+              const url = encodeURIComponent(window.location.href);
+              window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+            });
+          }
+
+          // Facebook share
+          const facebookBtn = document.getElementById('share-facebook');
+          if (facebookBtn) {
+            facebookBtn.addEventListener('click', () => {
+              const url = encodeURIComponent(window.location.href);
+              window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+            });
+          }
+
+          // Copy link
+          const copyBtn = document.getElementById('copy-link');
+          if (copyBtn) {
+            copyBtn.addEventListener('click', async () => {
+              try {
+                await navigator.clipboard.writeText(window.location.href);
+                copyBtn.innerHTML = '<i class="icon-check" aria-hidden="true"></i> Copied!';
+                setTimeout(() => {
+                  copyBtn.innerHTML = '<i class="icon-link" aria-hidden="true"></i> Copy Link';
+                }, 2000);
+              } catch (err) {
+                console.error('Failed to copy link:', err);
+              }
+            });
+          }
+        });
+      }
+
+      async setupPostNavigation() {
+        if (!this.post) return;
+
+        try {
+          const response = await fetch('./data/posts.json');
+          const posts = await response.json();
+          
+          const currentIndex = posts.findIndex(p => p.slug === this.post.slug);
+          const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+          const nextPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+
+          this.renderPostNavigation(prevPost, nextPost);
+        } catch (error) {
+          console.error('Failed to load post navigation:', error);
+        }
+      }
+
+      renderPostNavigation(prevPost, nextPost) {
+        const prevContainer = document.getElementById('prev-post');
+        const nextContainer = document.getElementById('next-post');
+
+        if (prevPost && prevContainer) {
+          prevContainer.innerHTML = `
+            <a href="post.html?slug=${prevPost.slug}" class="nav-post-link">
+              <span class="nav-post-direction">← Previous</span>
+              <span class="nav-post-title">${prevPost.title}</span>
+            </a>
+          `;
+        }
+
+        if (nextPost && nextContainer) {
+          nextContainer.innerHTML = `
+            <a href="post.html?slug=${nextPost.slug}" class="nav-post-link">
+              <span class="nav-post-direction">Next →</span>
+              <span class="nav-post-title">${nextPost.title}</span>
+            </a>
+          `;
+        }
+      }
+
+      async setupRelatedPosts() {
+        if (!this.post) return;
+
+        try {
+          const response = await fetch('./data/posts.json');
+          const posts = await response.json();
+          
+          // Find related posts based on shared tags
+          const relatedPosts = posts
+            .filter(p => p.slug !== this.post.slug)
+            .map(p => ({
+              ...p,
+              similarity: this.calculateSimilarity(this.post, p)
+            }))
+            .sort((a, b) => b.similarity - a.similarity)
+            .slice(0, 3);
+
+          this.renderRelatedPosts(relatedPosts);
+        } catch (error) {
+          console.error('Failed to load related posts:', error);
+        }
+      }
+
+      calculateSimilarity(post1, post2) {
+        const tags1 = new Set(post1.tags);
+        const tags2 = new Set(post2.tags);
+        const intersection = new Set([...tags1].filter(x => tags2.has(x)));
+        const union = new Set([...tags1, ...tags2]);
+        
+        // Jaccard similarity + language match bonus
+        const jaccard = intersection.size / union.size;
+        const langBonus = post1.lang === post2.lang ? 0.2 : 0;
+        
+        return jaccard + langBonus;
+      }
+
+      renderRelatedPosts(relatedPosts) {
+        const container = document.getElementById('related-posts-grid');
+        if (!container || relatedPosts.length === 0) return;
+
+        container.innerHTML = relatedPosts.map(post => `
+          <article class="related-post-card">
+            <a href="post.html?slug=${post.slug}" class="related-post-link">
+              <div class="related-post-image">
+                <img src="${post.coverImage}" alt="${post.title}" loading="lazy">
+              </div>
+              <div class="related-post-content">
+                <h3 class="related-post-title">${post.title}</h3>
+                <p class="related-post-excerpt">${post.excerpt}</p>
+                <div class="related-post-meta">
+                  <time datetime="${post.date}">
+                    ${new Date(post.date).toLocaleDateString('en-US', { 
+                      month: 'short', 
+                      day: 'numeric', 
+                      year: 'numeric' 
+                    })}
+                  </time>
+                  <span class="related-post-read-time">${post.readTime}</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        `).join('');
+      }
+    }
+
+    // Icon fallbacks
+    document.addEventListener('DOMContentLoaded', function() {
+      const iconMap = {
+        'icon-moon': '🌙',
+        'icon-sun': '☀️',
+        'icon-arrow-left': '←',
+        'icon-twitter': '🐦',
+        'icon-linkedin': '💼',
+        'icon-facebook': '👍',
+        'icon-link': '🔗',
+        'icon-check': '✓'
+      };
+      
+      Object.keys(iconMap).forEach(iconClass => {
+        const icons = document.querySelectorAll(`.${iconClass}`);
+        icons.forEach(icon => {
+          if (!icon.textContent.trim()) {
+            icon.textContent = iconMap[iconClass];
+          }
+        });
+      });
+    });
+  </script>
+  <script src="assets/js/utils.js"></script>
+  <script src="./assets/js/blog.js"></script>
+</body>
+</html>

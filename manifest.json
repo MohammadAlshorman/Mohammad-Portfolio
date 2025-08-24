@@ -1,7 +1,7 @@
 {
-  "name": "Mohammad Al-shorman - Professional Portfolio",
-  "short_name": "Mohammad Portfolio",
-  "description": "Professional Full Stack Developer Portfolio showcasing modern web development projects and skills",
+  "name": "محمد الشرمان - مطور ويب محترف | Professional Portfolio & Blog",
+  "short_name": "محمد الشرمان",
+  "description": "مطور ويب محترف متخصص في ASP.NET Core و JavaScript من إربد، الأردن. مدونة تقنية ومشاريع احترافية",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -21,9 +21,47 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["portfolio", "developer", "business"],
+  "categories": ["portfolio", "developer", "business", "blog", "technology"],
   "lang": "en",
   "dir": "ltr",
   "scope": "/",
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "المدونة التقنية",
+      "short_name": "مدونة",
+      "description": "مقالات تقنية في تطوير الويب والبرمجة",
+      "url": "/blog/simple-blog.html",
+      "icons": [
+        {
+          "src": "img/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "المشاريع",
+      "short_name": "مشاريع",
+      "description": "مشاريع محمد الشرمان الاحترافية",
+      "url": "/Projects.html",
+      "icons": [
+        {
+          "src": "img/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "تواصل معي",
+      "short_name": "تواصل",
+      "description": "التواصل مع محمد الشرمان",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "img/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
 }

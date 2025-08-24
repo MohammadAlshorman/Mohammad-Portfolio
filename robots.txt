@@ -1,8 +1,29 @@
 User-agent: *
 Allow: /
 
+# Allow specific important pages
+Allow: /blog/simple-blog.html
+Allow: /blog/posts/
+Allow: /blog/assets/
+Allow: /Projects.html
+Allow: /index.html
+
+# Block unnecessary files for SEO
+Disallow: /blog/assets/js/
+Disallow: *.log
+Disallow: /temp/
+Disallow: /node_modules/
+
 # Sitemap
 Sitemap: https://mohammadportfolio-eta.vercel.app/sitemap.xml
 
-# Crawl-delay (optional - helps with server load)
+# Blog RSS Feed (if available)
+# Sitemap: https://mohammadportfolio-eta.vercel.app/blog/rss.xml
+
+# Crawl-delay (helps with server load)
 Crawl-delay: 1
+
+# Additional information for Mohammad Alshorman - Web Developer
+# Location: Irbid, Jordan
+# Specialization: ASP.NET Core, JavaScript, Angular
+# Contact: mohammad.alshorman.dev@gmail.com

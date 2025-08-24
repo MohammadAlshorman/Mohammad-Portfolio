@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular Performance Optimization - Mohammad Alshorman Blog</title>
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="glvuq_APk17ipqYfTsjfIWbPZSiPJc_1UZ_7O3MUsJs" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1S6WYT0T9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-S1S6WYT0T9');
+    </script>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Comprehensive guide to optimizing Angular application performance with practical techniques and best practices.">
+    <meta name="keywords" content="Angular, Performance, Optimization, Frontend, Mohammad Alshorman">
+    <meta name="author" content="Mohammad Alshorman">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/simple-blog.css">
+    
+    <style>
+        /* Article-specific styles for English content */
+        html[lang="en"] {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .article-content {
+            padding: 3rem 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #374151;
+        }
+        
+        .article-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #dc2626;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #dc2626;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .highlight-box::before {
+            content: '⚡';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #dc2626;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'TypeScript / Angular';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            background: #374151;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+        }
+        
+        .performance-technique {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .performance-technique:hover {
+            border-color: #dc2626;
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.1);
+        }
+        
+        .technique-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #dc2626;
+            display: block;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+        
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .back-to-blog:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 1rem;
+                border-radius: 15px;
+            }
+            
+            .article-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="blog-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../../index.html" class="logo">
+                    <img src="../../img/M7MD Alshorman.jpg" alt="Mohammad Alshorman" class="logo-image">
+                    <span>Mohammad Alshorman</span>
+                </a>
+                
+                <nav class="header-nav">
+                    <ul class="nav-links">
+                        <li><a href="../../index.html" class="nav-link">
+                            <i class="fas fa-home"></i> Home
+                        </a></li>
+                        <li><a href="../../Projects.html" class="nav-link">
+                            <i class="fas fa-briefcase"></i> Projects
+                        </a></li>
+                        <li><a href="../simple-blog.html" class="nav-link">
+                            <i class="fas fa-blog"></i> Blog
+                        </a></li>
+                        <li><a href="#contact" class="nav-link">
+                            <i class="fas fa-envelope"></i> Contact
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-controls">
+                    <button class="control-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i> Dark
+                    </button>
+                    <button class="control-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> AR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <a href="../simple-blog.html" class="back-to-blog">
+                <i class="fas fa-arrow-left"></i>
+                Back to Blog
+            </a>
+            
+            <article class="article-container">
+                <header class="article-header">
+                    <h1 class="article-title">Angular Performance Optimization</h1>
+                    <p class="article-subtitle">Advanced techniques and strategies to build lightning-fast Angular applications</p>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>December 28, 2023</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>18 minutes read</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user"></i>
+                            <span>Mohammad Alshorman</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i>
+                            <span>Angular</span>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="article-content">
+                    <section class="article-section">
+                        <h2 class="section-title">Introduction to Angular Performance</h2>
+                        <p>
+                            Performance is crucial for modern web applications. Users expect fast, responsive interfaces, and even a 
+                            few seconds of delay can significantly impact user experience and conversion rates. Angular provides 
+                            numerous tools and techniques to optimize application performance, from initial loading to runtime efficiency.
+                        </p>
+                        <p>
+                            In this comprehensive guide, we'll explore advanced performance optimization strategies that can help you 
+                            build Angular applications that load faster, run smoother, and provide exceptional user experiences. 
+                            We'll cover everything from bundle optimization to change detection strategies.
+                        </p>
+                    </section>
+
+                    <div class="highlight-box">
+                        <h3 style="color: #dc2626; margin-bottom: 1rem; font-weight: 600;">Performance Impact Statistics</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <div class="metric-card">
+                                <span class="metric-value">53%</span>
+                                <div class="metric-label">Users abandon sites that take over 3 seconds to load</div>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-value">100ms</span>
+                                <div class="metric-label">Delay can reduce conversions by 7%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Bundle Size Optimization</h2>
+                        
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">1. Tree Shaking and Dead Code Elimination</h3>
+                        <p>
+                            Angular CLI uses Webpack to automatically remove unused code. Ensure you're importing only what you need:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // ❌ Bad: Imports entire library<br>
+                            import * as _ from 'lodash';<br>
+                            <br>
+                            // ✅ Good: Import only specific functions<br>
+                            import { debounce, throttle } from 'lodash';<br>
+                            <br>
+                            // ✅ Even better: Use lodash-es for better tree shaking<br>
+                            import debounce from 'lodash-es/debounce';<br>
+                            import throttle from 'lodash-es/throttle';
+                        </div>
+
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">2. Lazy Loading Modules</h3>
+                        <p>
+                            Implement lazy loading to split your application into smaller chunks that load on demand:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // app-routing.module.ts<br>
+                            const routes: Routes = [<br>
+                            &nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;path: 'admin',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)<br>
+                            &nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;path: 'products',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)<br>
+                            &nbsp;&nbsp;}<br>
+                            ];<br>
+                            <br>
+                            // For standalone components (Angular 14+)<br>
+                            const routes: Routes = [<br>
+                            &nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;path: 'dashboard',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;loadComponent: () => import('./dashboard/dashboard.component')<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(m => m.DashboardComponent)<br>
+                            &nbsp;&nbsp;}<br>
+                            ];
+                        </div>
+
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">3. Preloading Strategies</h3>
+                        <p>
+                            Configure intelligent preloading to balance initial load time with user experience:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Custom preloading strategy<br>
+                            @Injectable()<br>
+                            export class CustomPreloadingStrategy implements PreloadingStrategy {<br>
+                            &nbsp;&nbsp;preload(route: Route, load: () => Observable&lt;any&gt;): Observable&lt;any&gt; {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Preload only routes marked with data.preload = true<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return route.data && route.data['preload'] ? load() : of(null);<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            // Apply in routing module<br>
+                            RouterModule.forRoot(routes, {<br>
+                            &nbsp;&nbsp;preloadingStrategy: CustomPreloadingStrategy<br>
+                            })
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Change Detection Optimization</h2>
+                        
+                        <div class="performance-technique">
+                            <div class="technique-title">
+                                <i class="fas fa-tachometer-alt" style="color: #10b981;"></i>
+                                OnPush Change Detection Strategy
+                            </div>
+                            <p>Reduce change detection cycles by using OnPush strategy for components that don't need frequent updates.</p>
+                        </div>
+
+                        <div class="code-block">
+                            <br>
+                            @Component({<br>
+                            &nbsp;&nbsp;selector: 'app-product-card',<br>
+                            &nbsp;&nbsp;template: `...`,<br>
+                            &nbsp;&nbsp;changeDetection: ChangeDetectionStrategy.OnPush<br>
+                            })<br>
+                            export class ProductCardComponent {<br>
+                            &nbsp;&nbsp;@Input() product!: Product;<br>
+                            &nbsp;&nbsp;@Output() addToCart = new EventEmitter&lt;Product&gt;();<br>
+                            <br>
+                            &nbsp;&nbsp;constructor(private cdr: ChangeDetectorRef) {}<br>
+                            <br>
+                            &nbsp;&nbsp;// Manually trigger change detection when needed<br>
+                            &nbsp;&nbsp;updateData(newData: any) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Update component state<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.cdr.markForCheck();<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+
+                        <div class="performance-technique">
+                            <div class="technique-title">
+                                <i class="fas fa-eye-slash" style="color: #f59e0b;"></i>
+                                Detach from Change Detection
+                            </div>
+                            <p>For components with complex calculations or frequent updates, consider detaching from automatic change detection.</p>
+                        </div>
+
+                        <div class="code-block">
+                            <br>
+                            @Component({<br>
+                            &nbsp;&nbsp;template: `<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;Heavy computation result: {{ result }}&lt;/div&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;button (click)="performCalculation()"&gt;Calculate&lt;/button&gt;<br>
+                            &nbsp;&nbsp;`<br>
+                            })<br>
+                            export class HeavyCalculationComponent implements OnInit {<br>
+                            &nbsp;&nbsp;result = 0;<br>
+                            <br>
+                            &nbsp;&nbsp;constructor(private cdr: ChangeDetectorRef) {}<br>
+                            <br>
+                            &nbsp;&nbsp;ngOnInit() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Detach from automatic change detection<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.cdr.detach();<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;performCalculation() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Perform heavy calculation<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.result = this.heavyComputation();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Manually trigger change detection<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.cdr.detectChanges();<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Runtime Performance Techniques</h2>
+                        
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">1. Virtual Scrolling</h3>
+                        <p>
+                            Handle large lists efficiently with Angular CDK's virtual scrolling:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Install Angular CDK<br>
+                            // npm install @angular/cdk<br>
+                            <br>
+                            // Component template<br>
+                            &lt;cdk-virtual-scroll-viewport itemSize="50" class="viewport"&gt;<br>
+                            &nbsp;&nbsp;&lt;div *cdkVirtualFor="let item of items; trackBy: trackByFn"&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{{ item.name }}<br>
+                            &nbsp;&nbsp;&lt;/div&gt;<br>
+                            &lt;/cdk-virtual-scroll-viewport&gt;<br>
+                            <br>
+                            // Component<br>
+                            export class LargeListComponent {<br>
+                            &nbsp;&nbsp;items = Array.from({length: 100000}, (_, i) => ({<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;id: i,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;name: `Item ${i}`<br>
+                            &nbsp;&nbsp;}));<br>
+                            <br>
+                            &nbsp;&nbsp;trackByFn(index: number, item: any) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return item.id; // Use unique identifier<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">2. TrackBy Functions</h3>
+                        <p>
+                            Optimize *ngFor performance with proper trackBy functions:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // ❌ Bad: Angular recreates DOM elements unnecessarily<br>
+                            &lt;div *ngFor="let user of users"&gt;<br>
+                            &nbsp;&nbsp;{{ user.name }}<br>
+                            &lt;/div&gt;<br>
+                            <br>
+                            // ✅ Good: Angular reuses existing DOM elements<br>
+                            &lt;div *ngFor="let user of users; trackBy: trackByUserId"&gt;<br>
+                            &nbsp;&nbsp;{{ user.name }}<br>
+                            &lt;/div&gt;<br>
+                            <br>
+                            // Component<br>
+                            trackByUserId(index: number, user: User): number {<br>
+                            &nbsp;&nbsp;return user.id;<br>
+                            }
+                        </div>
+
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">3. Async Pipe and Observables</h3>
+                        <p>
+                            Use async pipe to automatically handle subscriptions and change detection:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // ❌ Manual subscription management<br>
+                            export class UserComponent implements OnInit, OnDestroy {<br>
+                            &nbsp;&nbsp;users: User[] = [];<br>
+                            &nbsp;&nbsp;private subscription = new Subscription();<br>
+                            <br>
+                            &nbsp;&nbsp;ngOnInit() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.subscription.add(<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.userService.getUsers().subscribe(users => {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.users = users;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;ngOnDestroy() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.subscription.unsubscribe();<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            // ✅ Async pipe handles everything<br>
+                            export class UserComponent {<br>
+                            &nbsp;&nbsp;users$ = this.userService.getUsers();<br>
+                            <br>
+                            &nbsp;&nbsp;constructor(private userService: UserService) {}<br>
+                            }<br>
+                            <br>
+                            // Template<br>
+                            &lt;div *ngFor="let user of users$ | async"&gt;<br>
+                            &nbsp;&nbsp;{{ user.name }}<br>
+                            &lt;/div&gt;
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Image and Asset Optimization</h2>
+                        
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">1. Angular Image Directive (v15+)</h3>
+                        <p>
+                            Use Angular's optimized image directive for better performance:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Import NgOptimizedImage in your module<br>
+                            import { NgOptimizedImage } from '@angular/common';<br>
+                            <br>
+                            @NgModule({<br>
+                            &nbsp;&nbsp;imports: [NgOptimizedImage],<br>
+                            &nbsp;&nbsp;// ...<br>
+                            })<br>
+                            <br>
+                            // Template with optimized image<br>
+                            &lt;img<br>
+                            &nbsp;&nbsp;ngSrc="assets/hero-image.jpg"<br>
+                            &nbsp;&nbsp;width="800"<br>
+                            &nbsp;&nbsp;height="600"<br>
+                            &nbsp;&nbsp;priority&gt; &lt;!-- For above-the-fold images --&gt;<br>
+                            <br>
+                            &lt;img<br>
+                            &nbsp;&nbsp;ngSrc="assets/product-{{ product.id }}.jpg"<br>
+                            &nbsp;&nbsp;width="300"<br>
+                            &nbsp;&nbsp;height="200"<br>
+                            &nbsp;&nbsp;loading="lazy"&gt; &lt;!-- For below-the-fold images --&gt;
+                        </div>
+
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">2. Service Worker and Caching</h3>
+                        <p>
+                            Implement service worker for offline support and caching:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Add PWA support<br>
+                            ng add @angular/pwa<br>
+                            <br>
+                            // Configure caching in ngsw-config.json<br>
+                            {<br>
+                            &nbsp;&nbsp;"index": "/index.html",<br>
+                            &nbsp;&nbsp;"assetGroups": [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "app",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"installMode": "prefetch",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"updateMode": "prefetch",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"resources": {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"files": ["/favicon.ico", "/index.html", "/*.css", "/*.js"]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "assets",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"installMode": "lazy",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"updateMode": "prefetch",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"resources": {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"files": ["/assets/**"]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;]<br>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Performance Monitoring and Analysis</h2>
+                        
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">1. Angular DevTools</h3>
+                        <p>
+                            Use Angular DevTools browser extension to profile your application:
+                        </p>
+                        <ul style="margin: 1rem 0 1rem 2rem; line-height: 2;">
+                            <li>Component tree inspection</li>
+                            <li>Change detection profiling</li>
+                            <li>Dependency injection analysis</li>
+                            <li>Route tree exploration</li>
+                        </ul>
+
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">2. Bundle Analysis</h3>
+                        <p>
+                            Analyze your bundle size with webpack-bundle-analyzer:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Install bundle analyzer<br>
+                            npm install --save-dev webpack-bundle-analyzer<br>
+                            <br>
+                            // Build with stats<br>
+                            ng build --stats-json<br>
+                            <br>
+                            // Analyze bundle<br>
+                            npx webpack-bundle-analyzer dist/your-app/stats.json<br>
+                            <br>
+                            // Or use Angular CLI's built-in analyzer<br>
+                            ng build --source-map<br>
+                            npx webpack-bundle-analyzer dist/your-app/*.js
+                        </div>
+
+                        <h3 style="color: #dc2626; margin: 2rem 0 1rem; font-weight: 600;">3. Web Performance Metrics</h3>
+                        <p>
+                            Monitor Core Web Vitals and other performance metrics:
+                        </p>
+
+                        <div class="code-block">
+                            <br>
+                            // Performance measurement service<br>
+                            @Injectable({ providedIn: 'root' })<br>
+                            export class PerformanceService {<br>
+                            &nbsp;&nbsp;measureFCP() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return new Promise(resolve => {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new PerformanceObserver((list) => {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const entries = list.getEntries();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const fcp = entries.find(entry => entry.name === 'first-contentful-paint');<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(fcp?.startTime);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).observe({ type: 'paint', buffered: true });<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;measureLCP() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return new Promise(resolve => {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new PerformanceObserver((list) => {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const entries = list.getEntries();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const lcp = entries[entries.length - 1];<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(lcp?.startTime);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).observe({ type: 'largest-contentful-paint', buffered: true });<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Advanced Optimization Strategies</h2>
+                        
+                        <div class="performance-technique">
+                            <div class="technique-title">
+                                <i class="fas fa-rocket" style="color: #8b5cf6;"></i>
+                                Micro-frontend Architecture
+                            </div>
+                            <p>Split large applications into smaller, independently deployable modules.</p>
+                        </div>
+
+                        <div class="performance-technique">
+                            <div class="technique-title">
+                                <i class="fas fa-server" style="color: #06b6d4;"></i>
+                                Server-Side Rendering (SSR)
+                            </div>
+                            <p>Implement Angular Universal for better initial load times and SEO.</p>
+                        </div>
+
+                        <div class="performance-technique">
+                            <div class="technique-title">
+                                <i class="fas fa-bolt" style="color: #eab308;"></i>
+                                Prerendering
+                            </div>
+                            <p>Generate static HTML at build time for improved performance.</p>
+                        </div>
+
+                        <div class="code-block">
+                            <br>
+                            // Add Angular Universal<br>
+                            ng add @nguniversal/express-engine<br>
+                            <br>
+                            // Build and serve with SSR<br>
+                            npm run build:ssr<br>
+                            npm run serve:ssr<br>
+                            <br>
+                            // Prerendering with Angular CLI<br>
+                            ng run your-app:prerender
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Performance Checklist</h2>
+                        <div style="background: #f8fafc; border-radius: 15px; padding: 2rem; margin: 2rem 0;">
+                            <h3 style="color: #dc2626; margin-bottom: 1.5rem;">Before Production Deployment:</h3>
+                            <ul style="line-height: 2.2; margin-left: 1rem;">
+                                <li>✅ Enable production mode and AOT compilation</li>
+                                <li>✅ Implement lazy loading for feature modules</li>
+                                <li>✅ Use OnPush change detection where appropriate</li>
+                                <li>✅ Optimize images and enable lazy loading</li>
+                                <li>✅ Implement service worker for caching</li>
+                                <li>✅ Analyze bundle size and remove unused dependencies</li>
+                                <li>✅ Use trackBy functions for large lists</li>
+                                <li>✅ Profile with Angular DevTools</li>
+                                <li>✅ Test on different devices and network conditions</li>
+                                <li>✅ Monitor Core Web Vitals</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">Conclusion</h2>
+                        <p>
+                            Angular performance optimization is an ongoing process that requires careful attention to both initial 
+                            load times and runtime performance. By implementing the techniques covered in this guide, you can 
+                            significantly improve your application's user experience and meet modern web performance standards.
+                        </p>
+                        <p>
+                            Remember that optimization should be based on actual measurements, not assumptions. Use profiling tools 
+                            to identify bottlenecks, measure the impact of your optimizations, and continuously monitor your 
+                            application's performance in production.
+                        </p>
+                        <p>
+                            The Angular ecosystem continues to evolve with new performance features and improvements. Stay updated 
+                            with the latest Angular releases and best practices to ensure your applications remain fast and efficient 
+                            as they grow and evolve.
+                        </p>
+                    </section>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding: 2rem 0;">
+                <div class="footer-copyright">
+                    <p><strong>© 2024 Mohammad Alshorman</strong> - All Rights Reserved</p>
+                </div>
+                <div class="footer-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Irbid, Jordan</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/simple-blog.js"></script>
+</body>
+</html>

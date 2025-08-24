@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونة محمد الشرمان | مطور ويب محترف | ASP.NET و JavaScript | إربد، الأردن</title>
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="glvuq_APk17ipqYfTsjfIWbPZSiPJc_1UZ_7O3MUsJs" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1S6WYT0T9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-S1S6WYT0T9');
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="مدونة محمد الشرمان للتطوير والبرمجة من الأردن. مقالات تقنية متخصصة في ASP.NET Core، JavaScript، Angular، وأحدث تقنيات تطوير الويب. شروحات مفصلة ونصائح عملية من خبير تطوير ويب في إربد.">
+    <meta name="keywords" content="محمد الشرمان، تطوير ويب، ASP.NET Core، JavaScript، Angular، برمجة، تقنية، مدونة، إربد، الأردن، مطور ويب، REST API، Clean Architecture، أداء تطبيقات، تطوير تطبيقات">
+    <meta name="author" content="Mohammad Alshorman">
+    <meta name="geo.region" content="JO">
+    <meta name="geo.placename" content="Irbid">
+    <meta name="geo.position" content="32.5556;35.8500">
+    <meta name="ICBM" content="32.5556, 35.8500">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="مدونة محمد الشرمان - مطور ويب محترف">
+    <meta property="og:description" content="مدونة تقنية متخصصة في تطوير الويب والبرمجة">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_JO">
+    <meta property="og:image" content="https://mohammadalshorman.com/img/M7MD%20Alshorman.jpg">
+    <meta property="og:url" content="https://mohammadalshorman.com/blog/">
+    <meta property="og:site_name" content="محمد الشرمان - مطور ويب">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="مدونة محمد الشرمان - مطور ويب محترف">
+    <meta name="twitter:description" content="مدونة تقنية متخصصة في تطوير الويب والبرمجة">
+    <meta name="twitter:image" content="https://mohammadalshorman.com/img/M7MD%20Alshorman.jpg">
+    <meta name="twitter:creator" content="@mohammad_alshorman">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="language" content="Arabic">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="general">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mohammadalshorman.com/blog/">
+    
+    <!-- Alternate Languages -->
+    <link rel="alternate" hreflang="ar" href="https://mohammadalshorman.com/blog/">
+    <link rel="alternate" hreflang="en" href="https://mohammadalshorman.com/blog/en/">
+    <link rel="alternate" hreflang="x-default" href="https://mohammadalshorman.com/blog/">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="../img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon.png">
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- DNS Prefetch for Performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    
+    <!-- Preconnect for Critical Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Blog CSS -->
+    <link rel="stylesheet" href="assets/css/simple-blog.css">
+    
+    <!-- Enhanced Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "مدونة محمد الشرمان",
+        "description": "مدونة تقنية متخصصة في تطوير الويب والبرمجة",
+        "url": "https://mohammadalshorman.com/blog",
+        "image": "https://mohammadalshorman.com/img/M7MD%20Alshorman.jpg",
+        "inLanguage": "ar",
+        "dateModified": "2024-01-15",
+        "datePublished": "2023-12-01",
+        "author": {
+            "@type": "Person",
+            "name": "Mohammad Alshorman",
+            "jobTitle": "Web Developer",
+            "url": "https://mohammadalshorman.com",
+            "image": "https://mohammadalshorman.com/img/M7MD%20Alshorman.jpg",
+            "email": "mohammad.alshorman.dev@gmail.com",
+            "sameAs": [
+                "https://github.com/MohammadAlshorman",
+                "https://linkedin.com/in/mohammad-alshorman",
+                "https://twitter.com/mohammad_alshorman"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "JO",
+                "addressLocality": "Irbid"
+            }
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Mohammad Alshorman",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://mohammadalshorman.com/img/M7MD%20Alshorman.jpg"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://mohammadalshorman.com/blog"
+        },
+        "keywords": "تطوير ويب, ASP.NET, JavaScript, Angular, برمجة, تقنية, محمد الشرمان",
+        "genre": "Technology",
+        "copyrightYear": "2024",
+        "copyrightHolder": {
+            "@type": "Person",
+            "name": "Mohammad Alshorman"
+        }
+    }
+    </script>
+    
+    <!-- Additional Structured Data for Website -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "محمد الشرمان - مطور ويب",
+        "url": "https://mohammadalshorman.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://mohammadalshorman.com/blog/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "الرئيسية",
+                "item": "https://mohammadalshorman.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "المدونة",
+                "item": "https://mohammadalshorman.com/blog/simple-blog.html"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://mohammadalshorman.com/#person",
+        "name": "Mohammad Alshorman",
+        "alternateName": "محمد الشرمان",
+        "jobTitle": "Web Developer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Freelance Web Developer"
+        },
+        "url": "https://mohammadalshorman.com",
+        "email": "mohammad.alshorman.dev@gmail.com",
+        "telephone": "+962-7X-XXX-XXXX",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Irbid",
+            "addressCountry": "JO",
+            "addressRegion": "Irbid Governorate"
+        },
+        "nationality": "Jordanian",
+        "knowsLanguage": ["ar", "en"],
+        "knowsAbout": [
+            "ASP.NET Core",
+            "JavaScript",
+            "Angular",
+            "SQL Server",
+            "Web Development",
+            "REST API",
+            "Clean Architecture"
+        ],
+        "sameAs": [
+            "https://github.com/MohammadAlshorman",
+            "https://linkedin.com/in/mohammad-alshorman",
+            "https://twitter.com/mohammad_alshorman"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="blog-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <a href="../index.html" class="logo">
+                    <img src="../img/M7MD Alshorman.jpg" alt="محمد الشرمان" class="logo-image">
+                    <span>محمد الشرمان</span>
+                </a>
+                
+                <!-- Navigation -->
+                <nav class="header-nav">
+                    <ul class="nav-links">
+                        <li><a href="../index.html" class="nav-link">
+                            <i class="fas fa-home"></i> الرئيسية
+                        </a></li>
+                        <li><a href="../Projects.html" class="nav-link">
+                            <i class="fas fa-briefcase"></i> المشاريع
+                        </a></li>
+                        <li><a href="blog.html" class="nav-link active">
+                            <i class="fas fa-blog"></i> المدونة
+                        </a></li>
+                        <li><a href="#contact" class="nav-link">
+                            <i class="fas fa-envelope"></i> تواصل
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Controls -->
+                <div class="header-controls">
+                    <button class="control-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i> داكن
+                    </button>
+                    <button class="control-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-blog"></i>
+                    مدونة تقنية متخصصة
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-title-main">مدونة محمد الشرمان</span>
+                    <span class="hero-title-sub">أحدث المقالات في عالم التطوير والبرمجة</span>
+                </h1>
+                <p class="hero-description">
+                    اكتشف أحدث التقنيات والممارسات في تطوير الويب، مع شروحات مفصلة 
+                    ونصائح عملية من خبرتي في مجال البرمجة والتطوير.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="heroPostsCount">4</span>
+                        <span class="stat-label">مقال</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">لغة</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">تقنية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Search & Filters -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="search" 
+                               class="search-input" 
+                               id="searchInput"
+                               placeholder="ابحث في المقالات...">
+                    </div>
+                </div>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <label class="filter-label">التصنيف:</label>
+                        <select class="filter-select" id="categoryFilter">
+                            <option value="all">جميع التصنيفات</option>
+                            <option value="development">التطوير</option>
+                            <option value="api">واجهات البرمجة</option>
+                            <option value="architecture">المعمارية</option>
+                            <option value="frontend">الواجهة الأمامية</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">اللغة:</label>
+                        <select class="filter-select" id="languageFilter">
+                            <option value="all">جميع اللغات</option>
+                            <option value="arabic">العربية</option>
+                            <option value="english">English</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <div class="posts-summary">
+                        <h3 class="posts-count" id="postsCount">4 مقال</h3>
+                        <div class="posts-summary-meta">
+                            <i class="fas fa-clock"></i>
+                            <span>آخر تحديث: <span class="last-updated">يناير 2024</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Featured Posts -->
+            <section class="featured-posts">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    المقالات المميزة
+                </h2>
+                <div class="featured-grid" id="featuredGrid">
+                    <!-- Featured posts will be loaded here -->
+                </div>
+            </section>
+            
+            <!-- All Posts -->
+            <section class="all-posts">
+                <h2 class="section-title">
+                    <i class="fas fa-blog"></i>
+                    جميع المقالات
+                </h2>
+                <div class="posts-grid" id="postsGrid">
+                    <!-- Posts will be loaded here -->
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>جاري تحميل المقالات...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="../img/M7MD Alshorman.jpg" alt="محمد الشرمان" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>محمد الشرمان</h3>
+                            <p>مطور ويب محترف</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        مطور ويب متخصص في تقنيات .NET و JavaScript، 
+                        أقدم حلول تقنية مبتكرة ومقالات تعليمية في مجال البرمجة.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/MohammadAlshorman" class="social-link github" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/mohammad-alshorman" class="social-link linkedin" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://facebook.com/mohammad.alshorman" class="social-link facebook" target="_blank" rel="noopener">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com/mohammad_alshorman" class="social-link twitter" target="_blank" rel="noopener">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/mohammad.alshorman" class="social-link instagram" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:mohammad.alshorman.dev@gmail.com" class="social-link email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>الروابط السريعة</h4>
+                        <ul>
+                            <li><a href="../index.html" class="footer-link">الرئيسية</a></li>
+                            <li><a href="../Projects.html" class="footer-link">المشاريع</a></li>
+                            <li><a href="blog.html" class="footer-link">المدونة</a></li>
+                            <li><a href="#contact" class="footer-link">تواصل</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>التقنيات</h4>
+                        <ul>
+                            <li><a href="#" class="footer-link">ASP.NET Core</a></li>
+                            <li><a href="#" class="footer-link">JavaScript</a></li>
+                            <li><a href="#" class="footer-link">Angular</a></li>
+                            <li><a href="#" class="footer-link">SQL Server</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>المواضيع</h4>
+                        <ul>
+                            <li><a href="#" class="footer-link">تطوير الويب</a></li>
+                            <li><a href="#" class="footer-link">قواعد البيانات</a></li>
+                            <li><a href="#" class="footer-link">واجهات برمجة التطبيقات</a></li>
+                            <li><a href="#" class="footer-link">أفضل الممارسات</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p><strong>© 2024 محمد الشرمان</strong> - جميع الحقوق محفوظة</p>
+                    <p>مطور ويب محترف من الأردن 🇯🇴 | خبرة في ASP.NET Core و JavaScript</p>
+                    <p><small>تحديث أخير: يناير 2024 | مُحسن لمحركات البحث</small></p>
+                </div>
+                <div class="footer-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>إربد، الأردن</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        console.log('Blog page loaded successfully');
+    </script>
+    <script src="assets/js/simple-blog.js"></script>
+</body>
+</html>

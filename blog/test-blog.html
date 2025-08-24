@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونة محمد الشرمان - اختبار</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px;
+        }
+        
+        .post-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .post-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+        }
+        
+        .post-content {
+            padding: 25px;
+        }
+        
+        .post-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .post-excerpt {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #8e9297;
+        }
+        
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #6c757d;
+            font-size: 1.2em;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .lang-ar {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        .lang-en {
+            direction: ltr;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .posts-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 مدونة محمد الشرمان التقنية</h1>
+            <p>مطور ويب Full Stack - خبير في ASP.NET Core و Angular</p>
+        </div>
+        
+        <div id="loading" class="loading">
+            <div>⚡ جاري تحميل المقالات...</div>
+        </div>
+        
+        <div id="posts-container" class="posts-grid" style="display: none;"></div>
+        
+        <div class="stats">
+            <p>💡 إربد، الأردن | 📧 التطوير بأحدث التقنيات</p>
+        </div>
+    </div>
+
+    <script>
+        // بيانات المقالات مباشرة في الصفحة
+        const posts = [
+            {
+                id: "law-firm-management-system",
+                title: "نظام إدارة مكاتب المحاماة الشامل باستخدام ASP.NET Core",
+                excerpt: "تطوير نظام شامل لإدارة مكاتب المحاماة يتضمن إدارة القضايا، المواعيد، العملاء والفواتير باستخدام ASP.NET Core وSQL Server.",
+                date: "2024-01-15",
+                author: "محمد شحادة الشرمان",
+                lang: "ar",
+                tags: ["ASP.NET Core", "القانون", "إدارة الأعمال", "SQL Server", "Angular"],
+                readTime: 8,
+                category: "تطوير الأنظمة"
+            },
+            {
+                id: "rest-api-best-practices",
+                title: "أفضل الممارسات في تطوير REST APIs باستخدام ASP.NET Core",
+                excerpt: "دليل شامل لتطوير واجهات برمجة التطبيقات REST باستخدام ASP.NET Core مع التركيز على الأمان، الأداء، والتوثيق.",
+                date: "2024-02-10",
+                author: "محمد شحادة الشرمان",
+                lang: "ar", 
+                tags: ["ASP.NET Core", "REST API", "الأمان", "الأداء", "التوثيق"],
+                readTime: 12,
+                category: "تطوير الويب"
+            },
+            {
+                id: "clean-architecture-dotnet",
+                title: "Implementing Clean Architecture in .NET Applications",
+                excerpt: "A comprehensive guide to implementing Clean Architecture patterns in .NET applications for maintainable, testable, and scalable software solutions.",
+                date: "2024-03-05",
+                author: "Mohammad Alshorman",
+                lang: "en",
+                tags: ["Clean Architecture", ".NET", "Design Patterns", "Software Architecture", "SOLID Principles"],
+                readTime: 15,
+                category: "Software Architecture"
+            },
+            {
+                id: "angular-performance-optimization",
+                title: "Angular Performance Optimization: Advanced Techniques",
+                excerpt: "Comprehensive guide to optimizing Angular applications for better performance, including lazy loading, change detection strategies, and bundle optimization.",
+                date: "2024-03-20",
+                author: "Mohammad Alshorman",
+                lang: "en",
+                tags: ["Angular", "Performance", "Optimization", "Web Development", "TypeScript"],
+                readTime: 18,
+                category: "Frontend Development"
+            }
+        ];
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ar-SA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function renderPosts() {
+            const container = document.getElementById('posts-container');
+            const loading = document.getElementById('loading');
+            
+            setTimeout(() => {
+                loading.style.display = 'none';
+                container.style.display = 'grid';
+                
+                container.innerHTML = posts.map(post => `
+                    <article class="post-card ${post.lang === 'ar' ? 'lang-ar' : 'lang-en'}">
+                        <div class="post-image">
+                            ${post.lang === 'ar' ? '🔧' : '⚙️'}
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span>👤 ${post.author}</span>
+                                <span>📅 ${formatDate(post.date)}</span>
+                            </div>
+                            <h2 class="post-title">${post.title}</h2>
+                            <p class="post-excerpt">${post.excerpt}</p>
+                            <div class="post-tags">
+                                ${post.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <button class="btn" onclick="openPost('${post.id}')">
+                                    ${post.lang === 'ar' ? 'قراءة المقال' : 'Read Article'} 
+                                    ${post.lang === 'ar' ? '←' : '→'}
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                `).join('');
+            }, 1000);
+        }
+
+        function openPost(postId) {
+            // فتح المقال في الصفحة الأصلية
+            window.open(`post.html?id=${postId}`, '_blank');
+        }
+
+        // تشغيل المدونة
+        document.addEventListener('DOMContentLoaded', renderPosts);
+    </script>
+</body>
+</html>

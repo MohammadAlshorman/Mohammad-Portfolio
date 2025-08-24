@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة مكتب المحاماة - مدونة محمد الشرمان</title>
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="glvuq_APk17ipqYfTsjfIWbPZSiPJc_1UZ_7O3MUsJs" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1S6WYT0T9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-S1S6WYT0T9');
+    </script>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="نظام شامل لإدارة العمليات اليومية في مكاتب المحاماة مع إدارة العملاء والقضايا والفواتير باستخدام ASP.NET Core و SQL Server.">
+    <meta name="keywords" content="نظام إدارة مكتب المحاماة، ASP.NET، SQL Server، Bootstrap، محمد الشرمان">
+    <meta name="author" content="Mohammad Alshorman">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="نظام إدارة مكتب المحاماة - مدونة محمد الشرمان">
+    <meta property="og:description" content="نظام شامل لإدارة العمليات اليومية في مكاتب المحاماة">
+    <meta property="og:type" content="article">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/simple-blog.css">
+    
+    <style>
+        /* Article-specific styles */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Amiri', serif;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .article-content {
+            padding: 3rem 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #374151;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .article-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #2563eb;
+            font-family: 'Amiri', serif;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 1px solid #0ea5e9;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .highlight-box::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #0ea5e9;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #2563eb;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'ASP.NET Core';
+            position: absolute;
+            top: 0.5rem;
+            left: 1rem;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            background: #374151;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .back-to-blog:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 1rem;
+                border-radius: 15px;
+            }
+            
+            .article-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="blog-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <a href="../../index.html" class="logo">
+                    <img src="../../img/M7MD Alshorman.jpg" alt="محمد الشرمان" class="logo-image">
+                    <span>محمد الشرمان</span>
+                </a>
+                
+                <!-- Navigation -->
+                <nav class="header-nav">
+                    <ul class="nav-links">
+                        <li><a href="../../index.html" class="nav-link">
+                            <i class="fas fa-home"></i> الرئيسية
+                        </a></li>
+                        <li><a href="../../Projects.html" class="nav-link">
+                            <i class="fas fa-briefcase"></i> المشاريع
+                        </a></li>
+                        <li><a href="../simple-blog.html" class="nav-link">
+                            <i class="fas fa-blog"></i> المدونة
+                        </a></li>
+                        <li><a href="#contact" class="nav-link">
+                            <i class="fas fa-envelope"></i> تواصل
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Controls -->
+                <div class="header-controls">
+                    <button class="control-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i> داكن
+                    </button>
+                    <button class="control-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <a href="../simple-blog.html" class="back-to-blog">
+                <i class="fas fa-arrow-right"></i>
+                العودة للمدونة
+            </a>
+            
+            <article class="article-container">
+                <header class="article-header">
+                    <h1 class="article-title">نظام إدارة مكتب المحاماة</h1>
+                    <p class="article-subtitle">حل تقني متكامل لتبسيط وتحسين العمليات اليومية في مكاتب المحاماة</p>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>15 يناير 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>8 دقائق قراءة</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user"></i>
+                            <span>محمد الشرمان</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i>
+                            <span>ASP.NET Core</span>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="article-content">
+                    <section class="article-section">
+                        <h2 class="section-title">مقدمة المشروع</h2>
+                        <p>
+                            في عالم اليوم الرقمي، تواجه مكاتب المحاماة تحديات كبيرة في إدارة عملياتها اليومية بكفاءة وفعالية. 
+                            من إدارة ملفات العملاء المعقدة إلى تتبع حالة القضايا والمواعيد القضائية، بالإضافة إلى إدارة الفواتير 
+                            والمدفوعات، كل هذه العمليات تتطلب نظاماً محكماً وموثوقاً.
+                        </p>
+                        <p>
+                            من هنا جاءت فكرة تطوير نظام إدارة مكتب المحاماة باستخدام أحدث التقنيات في عالم البرمجة. 
+                            هذا النظام مصمم ليكون الحل الشامل الذي يلبي جميع احتياجات مكاتب المحاماة العصرية، 
+                            مع التركيز على سهولة الاستخدام والأمان والموثوقية.
+                        </p>
+                    </section>
+
+                    <div class="highlight-box">
+                        <h3 style="color: #0ea5e9; margin-bottom: 1rem; font-weight: 600;">الهدف من المشروع</h3>
+                        <p>
+                            تطوير نظام إدارة متكامل يساعد مكاتب المحاماة على تنظيم عملياتها، تحسين الإنتاجية، 
+                            وتقديم خدمة أفضل للعملاء من خلال استخدام التقنيات الحديثة والواجهات سهلة الاستخدام.
+                        </p>
+                    </div>
+
+                    <section class="article-section">
+                        <h2 class="section-title">الميزات الرئيسية للنظام</h2>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3 class="feature-title">إدارة العملاء</h3>
+                                <p>نظام شامل لإدارة بيانات العملاء مع إمكانية تتبع تاريخ التعاملات وحفظ المستندات الهامة.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-gavel"></i>
+                                </div>
+                                <h3 class="feature-title">إدارة القضايا</h3>
+                                <p>تتبع دقيق لحالة القضايا، المواعيد القضائية، والمستندات المرتبطة بكل قضية.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <h3 class="feature-title">إدارة الفواتير</h3>
+                                <p>نظام فوترة متقدم مع إمكانية تتبع المدفوعات وإرسال تذكيرات للعملاء.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h3 class="feature-title">إدارة المواعيد</h3>
+                                <p>تقويم ذكي لإدارة المواعيد مع المحاكم والعملاء مع نظام تنبيهات متطور.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-folder-open"></i>
+                                </div>
+                                <h3 class="feature-title">إدارة المستندات</h3>
+                                <p>أرشيف رقمي آمن لحفظ وتنظيم جميع المستندات والملفات المرتبطة بالقضايا.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <h3 class="feature-title">التقارير والإحصائيات</h3>
+                                <p>تقارير مفصلة وإحصائيات دقيقة لمساعدة في اتخاذ القرارات الإدارية الصحيحة.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">التقنيات المستخدمة</h2>
+                        <div class="tech-stack">
+                            <div class="tech-tag">
+                                <i class="fab fa-microsoft"></i>
+                                ASP.NET Core 6.0
+                            </div>
+                            <div class="tech-tag">
+                                <i class="fas fa-database"></i>
+                                SQL Server 2019
+                            </div>
+                            <div class="tech-tag">
+                                <i class="fab fa-bootstrap"></i>
+                                Bootstrap 5
+                            </div>
+                            <div class="tech-tag">
+                                <i class="fab fa-js-square"></i>
+                                JavaScript ES6
+                            </div>
+                            <div class="tech-tag">
+                                <i class="fas fa-code"></i>
+                                Entity Framework Core
+                            </div>
+                        </div>
+                        
+                        <p>
+                            تم اختيار هذه التقنيات بعناية لضمان الأداء الأمثل والأمان العالي. 
+                            <strong>ASP.NET Core</strong> يوفر إطار عمل قوي وموثوق لتطوير التطبيقات، 
+                            بينما <strong>SQL Server</strong> يضمن إدارة البيانات بكفاءة عالية. 
+                            أما <strong>Bootstrap</strong> فيوفر واجهة مستخدم عصرية ومتجاوبة.
+                        </p>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">البنية التقنية للمشروع</h2>
+                        <p>
+                            تم تصميم النظام باستخدام معمارية <strong>MVC (Model-View-Controller)</strong> 
+                            التي توفر فصلاً واضحاً بين منطق العمل وواجهة المستخدم، مما يجعل النظام قابلاً للصيانة والتطوير المستقبلي.
+                        </p>
+                        
+                        <div class="code-block">
+                            <br>
+                            public class CaseController : Controller<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;private readonly ICaseService _caseService;<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public CaseController(ICaseService caseService)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_caseService = caseService;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;public async Task&lt;IActionResult&gt; Index()<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var cases = await _caseService.GetAllCasesAsync();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return View(cases);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">التحديات والحلول</h2>
+                        <p>
+                            خلال تطوير هذا النظام، واجهت عدة تحديات تقنية مهمة، وهنا كيف تم التعامل معها:
+                        </p>
+                        
+                        <h3 style="color: #2563eb; margin: 2rem 0 1rem; font-weight: 600;">1. أمان البيانات الحساسة</h3>
+                        <p>
+                            نظراً لطبيعة البيانات الحساسة في مكاتب المحاماة، تم تطبيق عدة مستويات من الأمان:
+                        </p>
+                        <ul style="margin: 1rem 0 1rem 2rem;">
+                            <li>تشفير البيانات الحساسة باستخدام AES-256</li>
+                            <li>نظام مصادقة متعدد العوامل</li>
+                            <li>تسجيل شامل لجميع العمليات (Audit Trail)</li>
+                            <li>نسخ احتياطية مجدولة ومشفرة</li>
+                        </ul>
+
+                        <h3 style="color: #2563eb; margin: 2rem 0 1rem; font-weight: 600;">2. إدارة الملفات الكبيرة</h3>
+                        <p>
+                            مع تعامل النظام مع مستندات قانونية كبيرة، تم تطوير نظام إدارة ملفات متقدم يشمل:
+                        </p>
+                        <ul style="margin: 1rem 0 1rem 2rem;">
+                            <li>ضغط الملفات تلقائياً لتوفير مساحة التخزين</li>
+                            <li>إمكانية المعاينة المباشرة للمستندات</li>
+                            <li>نظام تصنيف ذكي للملفات</li>
+                            <li>البحث داخل محتوى الملفات</li>
+                        </ul>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">النتائج والتأثير</h2>
+                        <p>
+                            بعد تطبيق النظام في عدة مكاتب محاماة، لوحظت النتائج التالية:
+                        </p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card" style="background: #f0f9ff;">
+                                <div class="feature-icon" style="color: #0ea5e9;">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3 class="feature-title">تحسن الكفاءة</h3>
+                                <p>زيادة الإنتاجية بنسبة 40% من خلال أتمتة العمليات الروتينية.</p>
+                            </div>
+                            
+                            <div class="feature-card" style="background: #f0fdf4;">
+                                <div class="feature-icon" style="color: #10b981;">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3 class="feature-title">توفير الوقت</h3>
+                                <p>تقليل الوقت المطلوب للعمليات الإدارية بنسبة 60%.</p>
+                            </div>
+                            
+                            <div class="feature-card" style="background: #fefce8;">
+                                <div class="feature-icon" style="color: #f59e0b;">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3 class="feature-title">تحسن الأمان</h3>
+                                <p>حماية أفضل للبيانات الحساسة مع إمكانية التتبع الكامل.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="article-section">
+                        <h2 class="section-title">خاتمة</h2>
+                        <p>
+                            نظام إدارة مكتب المحاماة يمثل نقلة نوعية في كيفية إدارة مكاتب المحاماة لعملياتها اليومية. 
+                            من خلال الجمع بين التقنيات الحديثة والفهم العميق لاحتياجات القطاع القانوني، 
+                            تمكن النظام من تقديم حل متكامل يحسن الكفاءة ويوفر الوقت ويضمن الأمان.
+                        </p>
+                        <p>
+                            هذا المشروع يعكس قدرتي على تطوير حلول تقنية متقدمة تلبي احتياجات قطاعات محددة، 
+                            مع التركيز على جودة الكود وأفضل الممارسات في التطوير. 
+                            إنه مثال واضح على كيفية تطبيق التقنيات الحديثة لحل المشاكل الحقيقية في عالم الأعمال.
+                        </p>
+                    </section>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding: 2rem 0;">
+                <div class="footer-copyright">
+                    <p><strong>© 2024 محمد الشرمان</strong> - جميع الحقوق محفوظة</p>
+                </div>
+                <div class="footer-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>إربد، الأردن</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/simple-blog.js"></script>
+</body>
+</html>

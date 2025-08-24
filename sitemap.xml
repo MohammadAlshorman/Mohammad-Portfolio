@@ -76,4 +76,78 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog Homepage -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/simple-blog.html</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog Posts - New Structure -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/posts/post-1.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/posts/post-2.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/posts/post-3.html</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/posts/post-4.html</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Categories for better SEO -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/simple-blog.html?category=development</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/simple-blog.html?category=api</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/simple-blog.html?category=architecture</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/simple-blog.html?category=frontend</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog RSS Feed -->
+  <url>
+    <loc>https://mohammadportfolio-eta.vercel.app/blog/rss.xml</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>
